@@ -14,10 +14,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
  */
 
 
-
-// E genericité a revoir
-
-
 public interface EntityMapper<D, E> {
     E toEntity(D dto);
 

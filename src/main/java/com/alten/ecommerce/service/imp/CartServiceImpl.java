@@ -1,4 +1,3 @@
-
 package com.alten.ecommerce.service.imp;
 
 import com.alten.ecommerce.dto.CartDto;
@@ -16,9 +15,7 @@ import com.alten.ecommerce.repository.CartRepository;
 import com.alten.ecommerce.repository.ProductRepository;
 import com.alten.ecommerce.repository.UserRepository;
 import com.alten.ecommerce.service.CartService;
-
 import lombok.RequiredArgsConstructor;
-
 import java.util.Optional;
 
 @Service
@@ -32,7 +29,6 @@ public class CartServiceImpl implements CartService {
     private final CartItemRepository cartItemRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
-
 
     public CartItemDto addProductToCart(String email, Long productId) {
 

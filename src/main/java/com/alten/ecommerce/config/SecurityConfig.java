@@ -2,7 +2,7 @@ package com.alten.ecommerce.config;
 
 import com.alten.ecommerce.Auth.JWTAuthenticationEntryPoint;
 import com.alten.ecommerce.Auth.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,40 +18,21 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Autowired
-    private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
-    @Autowired
-    private UserDetailsService userDetailService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    /**@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //configuration
-        http.csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests.
-                        requestMatchers("/user").authenticated().
-                        requestMatchers("/api/**").permitAll().
-                        requestMatchers("/auth/login").permitAll().
-                        requestMatchers("/auth/create").permitAll().
-                        anyRequest().authenticated())
 
-                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }**/
+    private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final UserDetailsService userDetailService;
+    private final PasswordEncoder passwordEncoder;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Configuration de la sécurité
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()  // Permet l'accès sans authentification pour l'enregistrement
-                        .requestMatchers("/swagger-ui/**").permitAll() // Permettre Swagger UI
+                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/user").authenticated()
                         .requestMatchers("/api/**").permitAll()
@@ -61,7 +42,6 @@ public class SecurityConfig {
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // Ajouter le filtre JWT avant le filtre UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

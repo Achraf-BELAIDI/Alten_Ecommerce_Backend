@@ -22,6 +22,31 @@ public class ProductService {
         return productMapper.toDto(productRepository.save(product)) ;
     }
 
+    public Optional<ProductDto> partialUpdate(ProductDto product) {
+        return productRepository.findById(product.getId()).map(
+                existingProduct -> {
+                    if(product.getName() != null){
+                        existingProduct.setName(product.getName());
+                    }
+                    if(product.getDescription() != null){
+                        existingProduct.setDescription(product.getDescription());
+                    }
+                    if (product.getCode() != null){
+                        existingProduct.setCode(product.getCode());
+                    }
+                    if(String.valueOf(product.getQuantity()) != null){
+                        existingProduct.setQuantity(product.getQuantity());
+                    }
+                    if(String.valueOf(product.getPrice()) != null){
+                        existingProduct.setPrice(product.getPrice());
+                    }
+                    if(product.getCategory() != null){
+                        existingProduct.setCategory(product.getCategory());
+                    }
+                    return productMapper.toDto(productRepository.save(existingProduct));
+                }
+        );
+    }
     public List<ProductDto> getAllProducts() {
         return productMapper.toDto(productRepository.findAll()) ;
     }

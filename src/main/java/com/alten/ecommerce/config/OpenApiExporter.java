@@ -5,7 +5,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,12 +19,12 @@ public class OpenApiExporter {
     public void exportOpenApi() {
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String openApiUrl = "http://localhost:8080/v3/api-docs"; // Assurez-vous que l'URL est correcte pour votre serveur
+            String openApiUrl = "http://localhost:8080/v3/api-docs";
             String openApiJson = restTemplate.getForObject(openApiUrl, String.class);
 
             if (openApiJson != null) {
                 File file = new File(exportPath);
-                file.getParentFile().mkdirs(); // Crée les répertoires parents s'ils n'existent pas
+                file.getParentFile().mkdirs();
                 try (FileWriter fileWriter = new FileWriter(file)) {
                     fileWriter.write(openApiJson);
                     System.out.println("OpenAPI JSON exporté vers : " + file.getAbsolutePath());

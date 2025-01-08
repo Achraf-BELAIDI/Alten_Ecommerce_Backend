@@ -8,9 +8,9 @@ import com.alten.ecommerce.dto.resp.JwtResponse;
 import com.alten.ecommerce.dto.resp.UserResponseDto;
 import com.alten.ecommerce.exp.UserAlreadyExistsException;
 import com.alten.ecommerce.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,20 +23,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
-    private AuthConfig authConfig;
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationManager manager;
-    @Autowired
-    private JwtHelper helper;
-    @Autowired
-    private UserService userService;
+    private final AuthConfig authConfig;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationManager manager;
+    private final JwtHelper helper;
+    private final UserService userService;
 
     @PostMapping("/create")
     public ResponseEntity<JwtResponse> createUser(@RequestBody UserRequestDto userRequestDto) {

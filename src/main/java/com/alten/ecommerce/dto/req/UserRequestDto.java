@@ -11,5 +11,4 @@ public class UserRequestDto {
         private String email;
         private String password;
         private String aboutMe;
-
-} // c'est ce que je recois au moment d'enregistrement
+}

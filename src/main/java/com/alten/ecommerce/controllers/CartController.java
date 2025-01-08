@@ -3,8 +3,7 @@ package com.alten.ecommerce.controllers;
 import com.alten.ecommerce.dto.CartDto;
 import com.alten.ecommerce.dto.CartItemDto;
 import com.alten.ecommerce.dto.ProductDto;
-import com.alten.ecommerce.model.CartItem;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,21 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alten.ecommerce.model.Cart;
-import com.alten.ecommerce.model.Product;
 import com.alten.ecommerce.service.CartService;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cart")
+@RequiredArgsConstructor
 public class CartController {
 
-    @Autowired
-    private CartService cartService;
+    private final CartService cartService;
 
     @PostMapping("/add")
     public ResponseEntity<CartItemDto> addProductToCart(@RequestBody ProductDto productDto) {
