@@ -3,7 +3,6 @@ package com.alten.ecommerce.controllers;
 import com.alten.ecommerce.dto.ProductDto;
 import com.alten.ecommerce.dto.WishlistDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alten.ecommerce.model.Product;
-import com.alten.ecommerce.model.Wishlist;
 import com.alten.ecommerce.service.WishlistService;
 
 @RestController
@@ -23,7 +19,6 @@ import com.alten.ecommerce.service.WishlistService;
 public class WishlistController {
 
     private final WishlistService wishlistService;
-
 
     @PostMapping("/addOrRemove")
     public ResponseEntity<WishlistDto> addProductToWishlist(@RequestBody ProductDto productDto) {

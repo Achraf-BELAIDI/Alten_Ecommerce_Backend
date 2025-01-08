@@ -5,7 +5,6 @@ import com.alten.ecommerce.mapper.WishlistMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alten.ecommerce.model.Product;
 import com.alten.ecommerce.model.UserEntity;
 import com.alten.ecommerce.model.Wishlist;

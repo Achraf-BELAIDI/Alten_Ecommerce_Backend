@@ -1,7 +1,6 @@
 package com.alten.ecommerce.service;
 
 import com.alten.ecommerce.dto.CartItemDto;
-
 import java.util.List;
 
 public interface CartItemService {

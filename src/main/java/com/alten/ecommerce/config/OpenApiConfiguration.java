@@ -17,7 +17,7 @@ public class OpenApiConfiguration {
     public GroupedOpenApi api() {
         return GroupedOpenApi.builder()
                 .group("v1")
-                .pathsToMatch("/api/**") // Assurez-vous que les chemins des API sont corrects
+                .pathsToMatch("/api/**")
                 .packagesToScan("com.alten.ecommerce")
                 .build();
     }

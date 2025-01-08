@@ -1,22 +1,23 @@
 package com.alten.ecommerce.controllers;
 
 import com.alten.ecommerce.dto.ProductDto;
-import com.alten.ecommerce.model.Product;
 import com.alten.ecommerce.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
 
     @PostMapping("/products")
     public ResponseEntity<?> createProduct(@RequestBody ProductDto productDto){
@@ -47,6 +48,16 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied: You do not have permission to add products.");
         }
         return ResponseEntity.ok(productService.updateProduct(id, updatedProduct));
+    }
+
+    @PatchMapping("/products/{id}")
+    public ResponseEntity<?> partialUpdateProduct(@PathVariable Long id, @RequestBody ProductDto product) {
+        Optional<ProductDto> result =  productService.partialUpdate(product);
+        if (result.isPresent()) {
+            return ResponseEntity.ok(result.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produit non trouvé.");
+        }
     }
 
     @DeleteMapping("/products/{id}")

@@ -3,10 +3,8 @@ package com.alten.ecommerce.controllers;
 
 import com.alten.ecommerce.dto.CartItemDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.alten.ecommerce.model.CartItem;
 import com.alten.ecommerce.service.CartItemService;
 
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.List;
 @RequestMapping("/api/cart-items")
 @RequiredArgsConstructor
 public class CartItemController {
-
 
     private final CartItemService cartItemService;
 

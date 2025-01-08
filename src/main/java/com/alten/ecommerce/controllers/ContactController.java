@@ -1,18 +1,17 @@
 package com.alten.ecommerce.controllers;
 
 import com.alten.ecommerce.dto.ContactDto;
-import com.alten.ecommerce.model.Contact;
 import com.alten.ecommerce.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contact")
+@RequiredArgsConstructor
 public class ContactController {
 
-    @Autowired
-    private ContactService contactService;
+    private final ContactService contactService;
 
     @PostMapping
     public ResponseEntity<ContactDto> submitContactForm(@RequestBody ContactDto contactDto) {

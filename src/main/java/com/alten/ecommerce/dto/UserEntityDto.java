@@ -1,6 +1,5 @@
 package com.alten.ecommerce.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

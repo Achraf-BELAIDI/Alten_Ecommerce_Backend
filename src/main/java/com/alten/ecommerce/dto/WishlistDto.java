@@ -1,7 +1,6 @@
 package com.alten.ecommerce.dto;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data
